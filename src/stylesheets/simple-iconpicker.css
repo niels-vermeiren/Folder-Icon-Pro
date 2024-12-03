@@ -1,0 +1,237 @@
+ /* Simple Font Awesome Icon Picker 2.0
+ * http://howlthemes.com
+ *
+ * Originally written by (c) 2016-17 Aumkar Thakur
+ * Special Thanks To Deepak Kamat
+ * Licensed under the MIT License
+ * https://github.com/aumkarthakur/simple-fontawesome-iconpicker/blob/master/LICENSE
+ *
+ */
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+header {
+  margin: 20px;
+}
+
+header h2 {
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+header h2 a {
+  text-decoration: none;
+  border-bottom: 1px solid #333;
+  color: #333;
+  text-transform: uppercase;
+}
+
+.page {
+  border: 1px solid #bbb;
+  margin: 20px;
+  padding: 20px;
+}
+
+h3 {
+  background: #ccc;
+  border: 1px solid #bbb;
+  color: #333;
+  font-size: 30px;
+  padding: 10px;
+  margin: -20px;
+  margin-bottom: 20px;
+}
+
+.input {
+  border: 1px solid #ccc;
+  background: #efefef;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 3px;
+  outline: none;
+}
+
+.input:focus {
+  border-color: #4598ff;
+}
+
+h4 {
+  font-weight: normal;
+  margin-bottom: 10px;
+}
+
+.incode {
+  background: #efefef;
+  padding: 3px;
+  color: #920000;
+  font-family: monospace;
+}
+
+code {
+  background: #efefef;
+  border: 1px solid #ccc;
+  padding: 10px;
+  display: block;
+  line-height: 18px;
+}
+
+.howl-iconpicker-outer {
+  background: rgba(0, 0, 0, 0.78);
+  display: none;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999999999;
+}
+
+.howl-iconpicker-middle {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+select.srchicons.has-accessible-features:focus {
+  outline: none !important;
+}
+
+.howl-iconpicker-close {
+  line-height: '19px';
+  background: #c40707;
+  user-select: none;
+  color: #fff;
+  padding: 10px;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-align: center;
+  width: 261px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.howl-iconpicker-close:hover {
+  background: #2b2a2a;
+  width: 261px;
+}
+
+.howl-iconpicker-close:active {
+  background: #1d1d1d;
+}
+
+.howl-iconpicker {
+  background: #ffffff;
+  width: 260px;
+  left: 0px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.howl-iconpicker:active,
+.howl-iconpicker:focus,
+.howl-iconpicker:hover {
+  display: block !important;
+}
+
+.howl-iconpicker .geticonval .fa {
+  font-size: 28px;
+  margin-right: 10px;
+  padding-bottom: 10px;
+}
+
+.howl-iconpicker .geticonval {
+  background: #fcfcfc;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 3px;
+  margin: 5px;
+  width: 28px;
+  height: 28px;
+  overflow: hidden;
+  float: left;
+}
+
+.howl-iconpicker .geticonval:hover {
+  background: #979494;
+  cursor: pointer;
+}
+
+.howl-iconpicker .geticonval:active {
+  background: #31303048;
+}
+
+.srchicons {
+  height: 40px;
+  background-color: #2b2a2a;
+  margin: 0px 0px 0px;
+  border: none !important;
+  border-radius: 0px;
+  width: 100%;
+  position: absolute;
+  display: block;
+  text-align: center;
+  font-weight: bold;
+}
+
+.srchicons>option {
+  padding: 5px 5px 5px 5px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.srchicons>option:hover {
+  box-shadow: 0 0 10px 100px #088178 inset;
+}
+
+.iconsholder {
+  display: flex;
+  user-select: none;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  height: 300px;
+  margin-bottom: 0px;
+  overflow: auto;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  gap: 10px;  
+}
+
+.icons-holder > img {
+  width: 48px;
+}
+
+.icon-item.selected {
+  background: #eaeced !important;
+}
+
+img:hover {
+  border: 2px solid #e1dede;
+  cursor: pointer;
+}
+
+img:active {
+  border: 2px solid #444444;
+}
+
+body {
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.srchicons {
+  color: white;
+}
+
+.srchicons>option {
+  color: white;
+}
+
+label#select-1731186282325430 {
+  border: 0px !important;
+}

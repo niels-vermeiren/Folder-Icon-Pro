@@ -1,0 +1,84 @@
+{
+  "name": "folder-icon-pro",
+  "productName": "Folder Icon Pro",
+  "version": "1.0.0",
+  "description": "Electron UI for changing folder icons to choose out of many predefined icon sets",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "build": "electron-builder --win --x64",
+    "dist": "electron-builder",
+    "clean": "rimraf dist"
+  },
+  "build": {
+    "asar": true,
+    "asarUnpack": [
+      "src/bin/**",
+      "src/resources/icons/**/*",
+      "src/preload.js",
+      "app/**"
+    ],
+    "extraFiles": [
+      {
+        "from": "src/bin/",
+        "to": "bin/",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "src/resources/icons",
+        "to": "icons/",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "appId": "be.webmade.foldericonpro",
+    "copyright": "2024",
+    "productName": "Folder Icon Pro",
+    "files": [
+      "src/**/*",
+      "resources/*",
+      "app/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        "msi"
+      ],
+      "signtoolOptions": {
+        "certificateFile": "./code-signing/FolderIconPro.pfx",
+        "publisherName": "CN=FolderIconPro",
+        "certificatePassword": ""
+      },
+      "icon": "src/resources/icons/logo.ico"
+    },
+    "msi": {
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "author": {
+    "name": "Niels Vermeiren"
+  },
+  "devDependencies": {
+    "electron": "^24.8.8",
+    "electron-builder": "^25.1.8",
+    "electron-wix-msi": "^5.1.3"
+  },
+  "dependencies": {
+    "electron-builder-squirrel-windows": "^25.1.8",
+    "electron-root-path": "^1.1.0",
+    "node-path": "^0.0.3",
+    "rage-edit": "^1.2.0",
+    "sudo-prompt": "^9.2.1",
+    "winattr": "^3.0.0"
+  }
+}

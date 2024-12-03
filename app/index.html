@@ -1,0 +1,32 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <body>
+    <!-- <button id="button">Click me to read file</button>
+
+    <p>File content is: <span id="file-content"></span></p>
+
+    <script>
+      document.getElementById('button').addEventListener('click', () => {
+        // Call the exposed function from the preload script.
+        window.api
+          .sendIcon()
+          // Attach a `.then` event since we made it a promise that returns data.
+          .then(({ event, data }) => {
+            console.log('renderer: event is:', event)
+            console.log('renderer: data received is:', data)
+
+            // Replace the content of the `<span>` element with the received data.
+            document.getElementById('file-content').innerText = data
+          })
+      })
+    </script> -->
+    <script src="./renderer.js"></script>
+  </body>
+</html>
