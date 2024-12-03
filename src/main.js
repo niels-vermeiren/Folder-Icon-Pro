@@ -1,7 +1,7 @@
 const { app, BrowserWindow, Notification, ipcMain } = require('electron');
 const path = require('path');
 const fs = require('fs');
-const sudo = require('sudo-prompt');
+const { exec } = require('child_process');
 const { Registry } = require('rage-edit');
 const winattr = require('winattr');
 require('events').EventEmitter.prototype._maxListeners = 70;
@@ -68,16 +68,26 @@ function getFiles(files = [], dirPath) {
 ipcMain.handle('get-app-path', () => app.getAppPath());
 ipcMain.handle('get-files', (_event, dirPath) => getFiles([], dirPath));
 ipcMain.handle('change-folder', async (_event, dirName) =>  getFiles([], dirName));
+
+const checkWriteAccess = (path) => {
+  try {
+    fs.accessSync(path, fs.constants.W_OK);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
 ipcMain.handle('set-folder-icon', async (_event, imgSrc, folderPath) => {
-
-  // Create desktop.ini, set the icon content and give it correct permissions
   folderPath = folderPath.replace(/^"|"$/g, '').trim();
-
   if (!imgSrc || !folderPath) throw new Error('Invalid arguments: imgSrc or folderPath is missing');
 
-  // Sanitize and prepair paths
   const sanitizedFolderPath = path.normalize(folderPath).replace(/\\+$/, '');
   const desktopiniPath = path.join(sanitizedFolderPath, 'desktop.ini');
+
+  if (!checkWriteAccess(sanitizedFolderPath)) {
+    throw new Error('Permission denied. Ensure you have write access to the folder.');
+  }
 
   const imgSrcNormalized = imgSrc.startsWith('file:///') ? decodeURIComponent(imgSrc.replace('file:///', '')) :
                            imgSrc.replace(/\//g, '\\');
@@ -98,7 +108,7 @@ ipcMain.handle('set-folder-icon', async (_event, imgSrc, folderPath) => {
   // Here we spam an explorer refresh via our Windows Explorer cash clearing script
   const cacheRefreshBinary = getRefreshExecutablePath();
   const cmdCache = `"${cacheRefreshBinary}" "${sanitizedFolderPath}" "${imgSrcNormalized}"`;
-  Array.from({ length: 8 }).forEach(() => sudo.exec(cmdCache, { name: 'cacheAndRefresh' }));
+  Array.from({ length: 8 }).forEach(() => exec(cmdCache, { name: 'cacheAndRefresh' }));
 });
 
 // Registry helper to add context menu commands
