@@ -1,6 +1,6 @@
 {
-  "name": "folder-icon-pro",
-  "productName": "Folder Icon Pro",
+  "name": "folder-icons-pro",
+  "productName": "Folder Icons Pro",
   "version": "1.0.0",
   "description": "Electron UI for changing folder icons to choose out of many predefined icon sets",
   "main": "src/main.js",
@@ -35,9 +35,9 @@
         ]
       }
     ],
-    "appId": "be.webmade.foldericonpro",
+    "appId": "be.webmade.foldericonspro",
     "copyright": "2024",
-    "productName": "Folder Icon Pro",
+    "productName": "Folder Icons Pro",
     "files": [
       "src/**/*",
       "resources/*",

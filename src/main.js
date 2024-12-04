@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Notification, ipcMain } = require('electron');
+const { app, BrowserWindow, Notification, ipcMain, dialog } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const { exec } = require('child_process');
@@ -31,7 +31,7 @@ function createWindow(chosenPath) {
   const win = new BrowserWindow({
     width: 275,
     height: 414,
-    title: 'Folder Icon Pro',
+    title: 'Folder Icons Pro',
     icon: path.join(__dirname, 'resources/icons/logo.ico'),
     autoHideMenuBar: true,
     resizable: false,
@@ -86,6 +86,7 @@ ipcMain.handle('set-folder-icon', async (_event, imgSrc, folderPath) => {
   const desktopiniPath = path.join(sanitizedFolderPath, 'desktop.ini');
 
   if (!checkWriteAccess(sanitizedFolderPath)) {
+    dialog.showErrorBox('Permission denied', 'Ensure you have write access to the folder');
     throw new Error('Permission denied. Ensure you have write access to the folder.');
   }
 
@@ -102,8 +103,13 @@ ipcMain.handle('set-folder-icon', async (_event, imgSrc, folderPath) => {
   }
 
   // Write to desktop.ini and make it hidden
-  fs.writeFileSync(desktopiniPath, data, 'utf-8');
-  winattr.setSync(desktopiniPath, { system: true, readonly: true, hidden: true });
+  try {
+    fs.writeFileSync(desktopiniPath, data, 'utf-8');
+    winattr.setSync(desktopiniPath, { system: true, readonly: true, hidden: true });
+  } catch {
+    dialog.showErrorBox('Permission denied', 'Ensure you have write access to the folder');
+    throw new Error('Permission denied. Ensure you have write access to the folder.');
+  }
 
   // Here we spam an explorer refresh via our Windows Explorer cash clearing script
   const cacheRefreshBinary = getRefreshExecutablePath();
@@ -134,7 +140,7 @@ async function addContextMenuItemCmdToRegistry() {
   app.setAppUserModelId(app.name);
 
   // Define launcher paths
-  const mainExecPath = path.join(resolveMainExecutablePath(), 'Folder Icon Pro.exe');
+  const mainExecPath = path.join(resolveMainExecutablePath(), 'Folder Icons Pro.exe');
 
   // Command to be added to the context menu
   const cmd = `"${mainExecPath}" "%1"`;

@@ -37,10 +37,10 @@ void setFolderIcon(const char* folderPath, const char* iconPath) {
     SHChangeNotify(SHCNE_UPDATEITEM, SHCNF_PATH, wideFolderPath, NULL);
     SHChangeNotify(SHCNE_UPDATEITEM, SHCNF_PATH, wideFolderPath, NULL);
     SHChangeNotify(
-        SHCNE_ASSOCCHANGED,         // Notify of any association change
-        SHCNF_IDLIST,               // Indicates all items
-        NULL,                       // No specific item
-        NULL                        // No additional information
+        SHCNE_ASSOCCHANGED,         
+        SHCNF_IDLIST,               
+        wideFolderPath,                      
+        NULL                        
     );
     
     // Free memory allocated for wide strings

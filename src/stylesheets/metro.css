@@ -51703,6 +51703,7 @@ a.info-button {
 }
 
 .select .option-list a {
+    text-align: left;
     top: 2;
     min-width: auto;
     height: 35px;

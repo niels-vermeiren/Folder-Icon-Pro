@@ -116,17 +116,13 @@ const EventHandlers = {
 };
 
 // IPC Communication
-const IPCHandlers = {
-  setup() {
-    window.electronAPI.ipcRenderer.on('chosen-path', (_event, path) => {
-      FolderPathManager.updatePath(path);
-    });
+window.electronAPI.ipcRenderer.on('chosen-path', (_event, path) => {
+  FolderPathManager.updatePath(path);
+});
 
-    window.electronAPI.ipcRenderer.on('add-icon', (_event, iconPath) => {
-      IconManager.addIcon(`file://${iconPath}`);
-    });
-  },
-};
+window.electronAPI.ipcRenderer.on('add-icon', (_event, iconPath) => {
+  IconManager.addIcon(`file://${iconPath}`);
+});
 
 // Initialization
 function initialize() {
@@ -136,8 +132,6 @@ function initialize() {
   $('#folder-selector').on('change', EventHandlers.onFolderSelectorChange);
   $('#folder-selector').val('colored_folders');
   $('#folder-selector').change();
-  // Setup IPC handlers
-  IPCHandlers.setup();
 }
 
 // Initialize when the document is ready
